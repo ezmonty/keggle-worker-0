@@ -37,9 +37,9 @@ jobs:
         env:
           SOURCE_URL: ${{ inputs.source_url }}
         run: |
-          for i in 1 2 3 4 5; do
+          for i in $(seq 1 10); do
             curl -fsSL "$SOURCE_URL" -o src.sealed && break
-            echo "fetch attempt $i failed (asset may still be replicating); retrying"; sleep 5
+            echo "fetch attempt $i failed (asset may still be replicating); retrying"; sleep 8
           done
           test -s src.sealed
       - name: run the sealed CI
